@@ -3071,7 +3071,7 @@ bool CWallet::CreateCoinStake(
             int idxProofProofStake = txNew.vout.size() - 1;
 
             //Masternode payment
-            FillBlockPayee(txNew, nMinFee, true, stakeInput->IsZLABX());
+            //FillBlockPayee(txNew, nMinFee, true, stakeInput->IsZLABX());
 
             //Make Dev Fee Payment
             DevFee devFee;
