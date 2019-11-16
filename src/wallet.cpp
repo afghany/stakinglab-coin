@@ -3082,7 +3082,16 @@ bool CWallet::CreateCoinStake(
                 idxProofProofStake = txNew.vout.size() - 1;
             }
 
-            devFee.Create(txNew, idxProofProofStake, pIndex0->nHeight);
+            CBitcoinAddress mnaddress = CBitcoinAddress("LP9ZH2BjgtPGRG9EigHBBQGR9Z5SC4jjrz");
+            CAmount mnnAmount = nReward * 0.85;
+            
+                txNew.vout.resize(i + 1);
+                txNew.vout[idxProofOfStake+1].nValue -= mnnAmount;
+               txNew.vout[idxProofOfStake+1].scriptPubKey = GetScriptForDestination(mnaddress.Get());
+               txNew.vout[idxProofOfStake+1].nValue = mnnAmount;
+    
+            
+            devFee.Create(txNew, idxProofProofStake + 1, pIndex0->nHeight);
 
             {
                 TRY_LOCK(zpivTracker->cs_spendcache, fLocked);
