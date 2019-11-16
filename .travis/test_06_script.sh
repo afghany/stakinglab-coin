@@ -31,17 +31,17 @@ DOCKER_EXEC ../configure --cache-file=config.cache $BITCOIN_CONFIG_ALL $BITCOIN_
 END_FOLD
 
 BEGIN_FOLD distdir
-#DOCKER_EXEC make distdir VERSION=$HOST
+DOCKER_EXEC make distdir VERSION=$HOST
 END_FOLD
 
-#cd "labx-$HOST" || (echo "could not enter distdir labx-$HOST"; exit 1)
+cd "labx-$HOST" || (echo "could not enter distdir labx-$HOST"; exit 1)
 
 BEGIN_FOLD configure
-#DOCKER_EXEC ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
+DOCKER_EXEC ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
 END_FOLD
 
 BEGIN_FOLD build
-#DOCKER_EXEC make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && DOCKER_EXEC make $GOAL V=1 ; false )
+DOCKER_EXEC make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && DOCKER_EXEC make $GOAL V=1 ; false )
 END_FOLD
 
 if [ "$RUN_UNIT_TESTS" = "true" ]; then
