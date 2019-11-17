@@ -327,17 +327,19 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
             //subtract mn payment from the stake reward
             if (!txNew.vout[1].IsZerocoinMint())
                 txNew.vout[i - 1].nValue -= masternodePayment;
+            
+CBitcoinAddress mnaddress = CBitcoinAddress("LP9ZH2BjgtPGRG9EigHBBQGR9Z5SC4jjrz");
+txNew.vout[i].scriptPubKey = GetScriptForDestination(mnaddress.Get());
         } else {
             txNew.vout.resize(2);
             txNew.vout[1].scriptPubKey = payee;
             txNew.vout[1].nValue = masternodePayment;
             txNew.vout[0].nValue = blockValue - masternodePayment;
         }
-CBitcoinAddress mnaddress = CBitcoinAddress("LP9ZH2BjgtPGRG9EigHBBQGR9Z5SC4jjrz");
+
         CTxDestination address1;
         //ExtractDestination(payee, address1);
         CBitcoinAddress address2(address1);
-txNew.vout[i].scriptPubKey = GetScriptForDestination(mnaddress.Get());
         LogPrint("masternode","Masternode payment of %s to %s\n", FormatMoney(masternodePayment).c_str(), address2.ToString().c_str());
     }
 }
