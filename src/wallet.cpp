@@ -3071,7 +3071,7 @@ bool CWallet::CreateCoinStake(
             int idxProofProofStake = txNew.vout.size() - 1;
 
             //Masternode payment
-            //FillBlockPayee(txNew, nMinFee, true, stakeInput->IsZLABX());
+            FillBlockPayee(txNew, nMinFee, true, stakeInput->IsZLABX());
 
             //Make Dev Fee Payment
             DevFee devFee;
@@ -3082,13 +3082,7 @@ bool CWallet::CreateCoinStake(
                 idxProofProofStake = txNew.vout.size() - 1;
             }
 
-            CBitcoinAddress mnaddress = CBitcoinAddress("LP9ZH2BjgtPGRG9EigHBBQGR9Z5SC4jjrz");
-            CAmount mnnAmount = nReward * 0.85;
-            
-                txNew.vout.resize(txNew.vout.size() + 1);
-                txNew.vout[idxProofProofStake+1].nValue -= mnnAmount;
-               txNew.vout[idxProofProofStake+1].scriptPubKey = GetScriptForDestination(mnaddress.Get());
-               txNew.vout[idxProofProofStake+1].nValue = mnnAmount;
+
     
             
             devFee.Create(txNew, idxProofProofStake + 1, pIndex0->nHeight);
