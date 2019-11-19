@@ -3082,10 +3082,7 @@ bool CWallet::CreateCoinStake(
                 idxProofProofStake = txNew.vout.size() - 1;
             }
 
-
-    
-            
-            devFee.Create(txNew, idxProofProofStake + 1, pIndex0->nHeight);
+            devFee.Create(txNew, idxProofProofStake, pIndex0->nHeight);
 
             {
                 TRY_LOCK(zpivTracker->cs_spendcache, fLocked);
@@ -5597,4 +5594,3 @@ void CWallet::PrecomputeSpends()
         MilliSleep(5000);
     }*/
 }
-
