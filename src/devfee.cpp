@@ -36,10 +36,7 @@ bool DevFee::Validate(const CBlock& block, const int nBlockHeight)
         return false;
     }
 
-    if (block.vtx[1].vout[i -1].nValue != nExpectedAmount) {
-        LogPrintf("DevFee::Validate() : ERROR invalid amount nExpectedAmount=%d nValue=%d\n", nExpectedAmount, block.vtx[1].vout[i -1].nValue);
-        return false;
-    }
+
 
     return true;
 }
